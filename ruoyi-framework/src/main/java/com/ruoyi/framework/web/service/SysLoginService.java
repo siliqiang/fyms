@@ -25,7 +25,7 @@ import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 登录校验方法
- * 
+ *
  * @author ruoyi
  */
 @Component
@@ -39,13 +39,13 @@ public class SysLoginService
 
     @Autowired
     private RedisCache redisCache;
-    
+
     @Autowired
     private ISysUserService userService;
 
     /**
      * 登录验证
-     * 
+     *
      * @param username 用户名
      * @param password 密码
      * @param code 验证码
@@ -57,16 +57,16 @@ public class SysLoginService
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
         String captcha = redisCache.getCacheObject(verifyKey);
         redisCache.deleteObject(verifyKey);
-        if (captcha == null)
-        {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
-            throw new CaptchaExpireException();
-        }
-        if (!code.equalsIgnoreCase(captcha))
-        {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
-            throw new CaptchaException();
-        }
+//        if (captcha == null)
+//        {
+//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
+//            throw new CaptchaExpireException();
+//        }
+//        if (!code.equalsIgnoreCase(captcha))
+//        {
+//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
+//            throw new CaptchaException();
+//        }
         // 用户验证
         Authentication authentication = null;
         try
