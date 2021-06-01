@@ -29,8 +29,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/system/cat")
-public class CatController extends BaseController
-{
+public class CatController extends BaseController {
     @Autowired
     private ICatService catService;
 
@@ -39,8 +38,7 @@ public class CatController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cat:list')")
     @GetMapping("/list")
-    public TableDataInfo list(Cat cat)
-    {
+    public TableDataInfo list(Cat cat) {
         startPage();
         List<Cat> list = catService.selectCatList(cat);
         return getDataTable(list);
@@ -52,8 +50,7 @@ public class CatController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cat:export')")
     @Log(title = "猫咪管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(Cat cat)
-    {
+    public AjaxResult export(Cat cat) {
         List<Cat> list = catService.selectCatList(cat);
         ExcelUtil<Cat> util = new ExcelUtil<Cat>(Cat.class);
         return util.exportExcel(list, "猫咪管理数据");
@@ -64,8 +61,7 @@ public class CatController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cat:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(catService.selectCatById(id));
     }
 
@@ -75,8 +71,7 @@ public class CatController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cat:add')")
     @Log(title = "猫咪管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Cat cat)
-    {
+    public AjaxResult add(@RequestBody Cat cat) {
         return toAjax(catService.insertCat(cat));
     }
 
@@ -86,8 +81,7 @@ public class CatController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cat:edit')")
     @Log(title = "猫咪管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Cat cat)
-    {
+    public AjaxResult edit(@RequestBody Cat cat) {
         return toAjax(catService.updateCat(cat));
     }
 
@@ -96,9 +90,8 @@ public class CatController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cat:remove')")
     @Log(title = "猫咪管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(catService.deleteCatByIds(ids));
     }
 }

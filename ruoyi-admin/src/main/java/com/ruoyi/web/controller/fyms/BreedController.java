@@ -49,6 +49,16 @@ public class BreedController extends BaseController
     }
 
     /**
+     * 查询宠物种类列表所有
+     */
+
+    @GetMapping("/list/all")
+    public AjaxResult listAll(Breed breed)
+    {
+        return AjaxResult.success(fyPetBreedService.selectFyPetBreedList(breed));
+    }
+
+    /**
      * 导出宠物种类列表
      */
     @PreAuthorize("@ss.hasPermi('system:breed:export')")
