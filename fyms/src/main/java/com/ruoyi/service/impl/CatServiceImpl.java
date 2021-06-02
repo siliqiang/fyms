@@ -2,6 +2,7 @@ package com.ruoyi.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.domain.Cat;
 import com.ruoyi.mapper.CatMapper;
 import com.ruoyi.service.ICatService;
@@ -54,6 +55,8 @@ public class CatServiceImpl implements ICatService
     @Override
     public int insertCat(Cat cat)
     {
+        //生成uuid
+        cat.setId(IdUtils.fastUUID());
         cat.setCreateTime(DateUtils.getNowDate());
         return catMapper.insertCat(cat);
     }

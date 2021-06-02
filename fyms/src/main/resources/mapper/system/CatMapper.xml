@@ -17,11 +17,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="breedName"    column="breed_name"    />
+        <result property="category"    column="category"    />
     </resultMap>
 
     <sql id="selectCatVo">
-        select id, breed_id, birth_date, have_date, prime_cost, url, state, create_by, create_time, update_by, update_time, remark from fy_pet_cat
-    </sql>
+        SELECT
+            a.id,
+            a.breed_id,
+            a.birth_date,
+            a.have_date,
+            a.prime_cost,
+            a.url,
+            a.state,
+            a.create_by,
+            a.create_time,
+            a.update_by,
+            a.update_time,
+            a.remark,
+            b.breed_name,
+            if( b.category=1,'英短','美短') as category
+        FROM
+            fy_pet_cat a
+                LEFT JOIN fy_pet_breed b ON a.breed_id=b.id     </sql>
 
     <select id="selectCatList" parameterType="Cat" resultMap="CatResult">
         <include refid="selectCatVo"/>
@@ -35,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectCatById" parameterType="String" resultMap="CatResult">
         <include refid="selectCatVo"/>
-        where id = #{id}
+        where a.id = #{id}
     </select>
 
     <insert id="insertCat" parameterType="Cat">

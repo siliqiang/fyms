@@ -1,5 +1,6 @@
 package com.ruoyi.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class Cat extends BaseEntity
 
     /** 拿猫价格 */
     @Excel(name = "拿猫价格")
-    private Long primeCost;
+    private BigDecimal primeCost;
 
     /** 图片地址 */
     private String url;
@@ -43,5 +44,15 @@ public class Cat extends BaseEntity
     /** 状态（字典）0：在售 1：已售 2：死亡 */
     @Excel(name = "状态", readConverterExp = "字=典")
     private String state;
+
+    /**
+     * 品种名称
+     */
+    private String breedName;
+
+    /**
+     * 类别
+     */
+    private String category;
 
 }
