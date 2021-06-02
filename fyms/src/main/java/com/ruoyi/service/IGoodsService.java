@@ -17,7 +17,7 @@ public interface IGoodsService
      * @param id 物品ID
      * @return 物品
      */
-    public Goods selectGoodsById(String id);
+     Goods selectGoodsById(String id);
 
     /**
      * 查询物品列表
@@ -25,7 +25,7 @@ public interface IGoodsService
      * @param goods 物品
      * @return 物品集合
      */
-    public List<Goods> selectGoodsList(Goods goods);
+     List<Goods> selectGoodsList(Goods goods);
 
     /**
      * 新增物品
@@ -33,7 +33,7 @@ public interface IGoodsService
      * @param goods 物品
      * @return 结果
      */
-    public int insertGoods(Goods goods);
+     int insertGoods(Goods goods);
 
     /**
      * 修改物品
@@ -41,7 +41,7 @@ public interface IGoodsService
      * @param goods 物品
      * @return 结果
      */
-    public int updateGoods(Goods goods);
+     int updateGoods(Goods goods);
 
     /**
      * 批量删除物品
@@ -49,7 +49,7 @@ public interface IGoodsService
      * @param ids 需要删除的物品ID
      * @return 结果
      */
-    public int deleteGoodsByIds(String[] ids);
+     int deleteGoodsByIds(String[] ids);
 
     /**
      * 删除物品信息
@@ -57,5 +57,5 @@ public interface IGoodsService
      * @param id 物品ID
      * @return 结果
      */
-    public int deleteGoodsById(String id);
+     int deleteGoodsById(String id);
 }
