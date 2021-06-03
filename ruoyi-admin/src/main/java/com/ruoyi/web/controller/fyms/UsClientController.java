@@ -38,6 +38,17 @@ public class UsClientController extends BaseController
         List<UsClient> list = usClientService.selectUsClientList(usClient);
         return getDataTable(list);
     }
+    /**
+     * 查询客户信息列表
+     */
+//    @PreAuthorize("@ss.hasPermi('system:client:list')")
+    @GetMapping("/list/select")
+    public TableDataInfo listBy(UsClient usClient)
+    {
+        startPage();
+        List<UsClient> list = usClientService.selectUsClientList(usClient);
+        return getDataTable(list);
+    }
 
     /**
      * 导出客户信息列表

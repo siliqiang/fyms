@@ -1,7 +1,9 @@
 package com.ruoyi.service.impl;
 
 import java.util.List;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.domain.Breed;
 import com.ruoyi.mapper.BreedMapper;
@@ -17,8 +19,7 @@ import org.springframework.stereotype.Service;
  * @date 2021-05-31
  */
 @Service
-public class BreedServiceImpl implements BreedService
-{
+public class BreedServiceImpl implements BreedService {
     @Autowired
     private BreedMapper breedMapper;
 
@@ -29,8 +30,7 @@ public class BreedServiceImpl implements BreedService
      * @return 宠物种类
      */
     @Override
-    public Breed selectFyPetBreedById(String id)
-    {
+    public Breed selectFyPetBreedById(String id) {
         return breedMapper.selectFyPetBreedById(id);
     }
 
@@ -41,8 +41,7 @@ public class BreedServiceImpl implements BreedService
      * @return 宠物种类
      */
     @Override
-    public List<Breed> selectFyPetBreedList(Breed breed)
-    {
+    public List<Breed> selectFyPetBreedList(Breed breed) {
         return breedMapper.selectFyPetBreedList(breed);
     }
 
@@ -53,9 +52,10 @@ public class BreedServiceImpl implements BreedService
      * @return 结果
      */
     @Override
-    public int insertFyPetBreed(Breed breed)
-    {
+    public int insertFyPetBreed(Breed breed) {
         breed.setId(IdUtils.fastUUID());
+        //创建人
+        breed.setCreateBy(SecurityUtils.getUsername());
         breed.setCreateTime(DateUtils.getNowDate());
         return breedMapper.insertFyPetBreed(breed);
     }
@@ -67,9 +67,11 @@ public class BreedServiceImpl implements BreedService
      * @return 结果
      */
     @Override
-    public int updateFyPetBreed(Breed breed)
-    {
+    public int updateFyPetBreed(Breed breed) {
+        //跟新时间
         breed.setUpdateTime(DateUtils.getNowDate());
+        //跟新人
+        breed.setUpdateBy(SecurityUtils.getUsername());
         return breedMapper.updateFyPetBreed(breed);
     }
 
@@ -80,8 +82,7 @@ public class BreedServiceImpl implements BreedService
      * @return 结果
      */
     @Override
-    public int deleteFyPetBreedByIds(String[] ids)
-    {
+    public int deleteFyPetBreedByIds(String[] ids) {
         return breedMapper.deleteFyPetBreedByIds(ids);
     }
 
@@ -92,8 +93,7 @@ public class BreedServiceImpl implements BreedService
      * @return 结果
      */
     @Override
-    public int deleteFyPetBreedById(String id)
-    {
+    public int deleteFyPetBreedById(String id) {
         return breedMapper.deleteFyPetBreedById(id);
     }
 }

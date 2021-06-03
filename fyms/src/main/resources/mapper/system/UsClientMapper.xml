@@ -14,6 +14,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
     </resultMap>
 
     <sql id="selectUsClientVo">
@@ -26,7 +27,8 @@
                create_by,
                create_time,
                update_by,
-               update_time
+               update_time,
+               status
         from us_client
     </sql>
 
@@ -51,6 +53,7 @@
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
             <if test="tel != null">tel,</if>
+            <if test="sex != null">sex,</if>
             <if test="fixtureDate != null">
                 fixture_date,
             </if>
@@ -64,6 +67,7 @@
             <if test="id != null">#{id},</if>
             <if test="name != null">#{name},</if>
             <if test="tel != null">#{tel},</if>
+            <if test="sex != null">#{sex},</if>
             <if test="fixtureDate != null">#{fixtureDate},
             </if>
             <if test="delFlag != null">#{delFlag},</if>
@@ -78,6 +82,7 @@
         update us_client
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
+            <if test="sex != null">sex = #{sex},</if>
             <if test="tel != null">tel = #{tel},</if>
             <if test="fixtureDate != null">
                 fixture_date = #{fixtureDate},

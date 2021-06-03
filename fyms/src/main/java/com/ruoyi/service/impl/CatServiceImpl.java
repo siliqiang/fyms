@@ -2,6 +2,7 @@ package com.ruoyi.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.domain.Cat;
 import com.ruoyi.mapper.CatMapper;
@@ -57,7 +58,11 @@ public class CatServiceImpl implements ICatService
     {
         //生成uuid
         cat.setId(IdUtils.fastUUID());
+        //创建人
+        cat.setCreateBy(SecurityUtils.getUsername());
+        //创建时间
         cat.setCreateTime(DateUtils.getNowDate());
+
         return catMapper.insertCat(cat);
     }
 
@@ -71,6 +76,7 @@ public class CatServiceImpl implements ICatService
     public int updateCat(Cat cat)
     {
         cat.setUpdateTime(DateUtils.getNowDate());
+        cat.setUpdateBy(SecurityUtils.getUsername());
         return catMapper.updateCat(cat);
     }
 
