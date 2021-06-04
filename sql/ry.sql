@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 03/06/2021 17:06:10
+ Date: 04/06/2021 18:26:29
 */
 
 SET NAMES utf8mb4;
@@ -37,10 +37,7 @@ CREATE TABLE `fy_pet_breed`  (
 -- ----------------------------
 -- Records of fy_pet_breed
 -- ----------------------------
-INSERT INTO `fy_pet_breed` VALUES ('6088a6a9-3616-478d-bad8-8acbf77a0204', '1', '物色合适', NULL, '', '2021-06-02 20:08:48', '', NULL, '3他二十一');
-INSERT INTO `fy_pet_breed` VALUES ('6795d702-cbeb-4e88-a281-9cd383131ffa', '1', '银渐层', NULL, '', '2021-06-01 14:28:45', '', NULL, NULL);
-INSERT INTO `fy_pet_breed` VALUES ('7a0c5d41-5b68-4174-9750-68260256042e', '2', '起司', NULL, '', '2021-05-31 17:21:02', '', NULL, NULL);
-INSERT INTO `fy_pet_breed` VALUES ('sfsadf', '1', '蓝白啊', 'ss啊啊啊', '', NULL, '', '2021-05-31 17:12:03', '测试蓝白');
+INSERT INTO `fy_pet_breed` VALUES ('dce3595c-8655-42d4-9362-bc6123243782', '2', '美短', NULL, 'admin', '2021-06-04 17:21:19', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for fy_pet_cat
@@ -49,6 +46,7 @@ DROP TABLE IF EXISTS `fy_pet_cat`;
 CREATE TABLE `fy_pet_cat`  (
   `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
   `breed_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '种类id',
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '猫咪名称不可重复',
   `birth_date` datetime(0) NULL DEFAULT NULL COMMENT '出生日期',
   `have_date` datetime(0) NULL DEFAULT NULL COMMENT '拿猫日期',
   `prime_cost` decimal(10, 0) NULL DEFAULT NULL COMMENT '拿猫价格',
@@ -65,7 +63,10 @@ CREATE TABLE `fy_pet_cat`  (
 -- ----------------------------
 -- Records of fy_pet_cat
 -- ----------------------------
-INSERT INTO `fy_pet_cat` VALUES ('040d9c7d-e060-4a09-b4dc-b0b1771ed965', '6795d702-cbeb-4e88-a281-9cd383131ffa', '2021-06-01 00:00:00', '2021-06-14 00:00:00', 111, 'http://localhost:8080/profile/upload/2021/06/02/04cdbd62-da04-4438-8a6b-47b78f2ba7c4.jpg', '0', '', '2021-06-02 20:08:07', '', NULL, '访问');
+INSERT INTO `fy_pet_cat` VALUES ('040d9c7d-e060-4a09-b4dc-b0b1771ed965', 'dce3595c-8655-42d4-9362-bc6123243782', NULL, '2021-06-01 00:00:00', '2021-06-14 00:00:00', 111, 'http://localhost:8080/profile/upload/2021/06/02/04cdbd62-da04-4438-8a6b-47b78f2ba7c4.jpg', '0', '', '2021-06-02 20:08:07', 'admin', '2021-06-04 17:21:32', '访问');
+INSERT INTO `fy_pet_cat` VALUES ('3842b23d-1476-4941-95d5-9a97f8f2d072', 'dce3595c-8655-42d4-9362-bc6123243782', NULL, '2021-06-07 00:00:00', '2021-06-01 00:00:00', 14, NULL, '0', 'admin', '2021-06-04 17:12:28', 'admin', '2021-06-04 17:21:38', NULL);
+INSERT INTO `fy_pet_cat` VALUES ('4f0fdb23-6a09-4fba-93ba-1ef2aad62a4c', 'dce3595c-8655-42d4-9362-bc6123243782', '美短1', '2021-06-01 00:00:00', '2021-06-02 00:00:00', 100, NULL, '0', 'admin', '2021-06-04 18:21:33', '', NULL, NULL);
+INSERT INTO `fy_pet_cat` VALUES ('8f50fb57-bd77-4ef3-9492-2bde3c05ff89', 'dce3595c-8655-42d4-9362-bc6123243782', '美短2', '2021-06-09 00:00:00', '2021-06-08 00:00:00', 120, NULL, '0', 'admin', '2021-06-04 18:21:58', '', NULL, '是');
 
 -- ----------------------------
 -- Table structure for fy_pet_goods
@@ -387,7 +388,7 @@ CREATE TABLE `qrtz_scheduler_state`  (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-KCLRD791622710445294', 1622711170474, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-KCLRD791622802067074', 1622802386746, 15000);
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -464,10 +465,10 @@ CREATE TABLE `qrtz_triggers`  (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1622710450000, -1, 5, 'PAUSED', 'CRON', 1622710445000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME100', 'DEFAULT', 'TASK_CLASS_NAME100', 'DEFAULT', NULL, 1622710446000, -1, 5, 'PAUSED', 'CRON', 1622710446000, 0, NULL, -1, '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1622710455000, -1, 5, 'PAUSED', 'CRON', 1622710445000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1622710460000, -1, 5, 'PAUSED', 'CRON', 1622710446000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1622802070000, -1, 5, 'PAUSED', 'CRON', 1622802067000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME100', 'DEFAULT', 'TASK_CLASS_NAME100', 'DEFAULT', NULL, 1622802068000, -1, 5, 'PAUSED', 'CRON', 1622802068000, 0, NULL, -1, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1622802075000, -1, 5, 'PAUSED', 'CRON', 1622802067000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1622802080000, -1, 5, 'PAUSED', 'CRON', 1622802067000, 0, NULL, 2, '');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -550,7 +551,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -613,7 +614,7 @@ CREATE TABLE `sys_dict_type`  (
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
   UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -819,7 +820,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 194 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 202 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -922,6 +923,10 @@ INSERT INTO `sys_logininfor` VALUES (194, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (195, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 09:52:44');
 INSERT INTO `sys_logininfor` VALUES (196, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 15:50:27');
 INSERT INTO `sys_logininfor` VALUES (197, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 16:38:37');
+INSERT INTO `sys_logininfor` VALUES (198, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 17:35:26');
+INSERT INTO `sys_logininfor` VALUES (199, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 20:15:30');
+INSERT INTO `sys_logininfor` VALUES (200, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-03 20:41:49');
+INSERT INTO `sys_logininfor` VALUES (201, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-04 16:21:28');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1091,7 +1096,7 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 277 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 301 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1293,6 +1298,32 @@ INSERT INTO `sys_oper_log` VALUES (293, '字典数据', 1, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (294, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.add()', 'POST', 1, 'admin', NULL, '/system/dict/data', '127.0.0.1', '内网IP', '{\"dictValue\":\"1\",\"dictSort\":1,\"params\":{},\"dictType\":\"fy_user_status\",\"dictLabel\":\"未成交\",\"createBy\":\"admin\",\"default\":false,\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-03 16:39:51');
 INSERT INTO `sys_oper_log` VALUES (295, '字典数据', 2, 'com.ruoyi.web.controller.system.SysDictDataController.edit()', 'PUT', 1, 'admin', NULL, '/system/dict/data', '127.0.0.1', '内网IP', '{\"dictValue\":\"1\",\"dictSort\":1,\"params\":{},\"dictType\":\"fy_user_status\",\"dictLabel\":\"待跟进\",\"createBy\":\"admin\",\"default\":false,\"isDefault\":\"N\",\"createTime\":1622709591000,\"dictCode\":111,\"updateBy\":\"admin\",\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-03 16:40:35');
 INSERT INTO `sys_oper_log` VALUES (296, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.add()', 'POST', 1, 'admin', NULL, '/system/dict/data', '127.0.0.1', '内网IP', '{\"dictValue\":\"2\",\"dictSort\":2,\"params\":{},\"dictType\":\"fy_user_status\",\"dictLabel\":\"已失效\",\"createBy\":\"admin\",\"default\":false,\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-03 16:40:51');
+INSERT INTO `sys_oper_log` VALUES (297, '物品', 1, 'com.ruoyi.web.controller.fyms.GoodsController.add()', 'POST', 1, 'admin', NULL, '/system/goods', '127.0.0.1', '内网IP', '{\"name\":\"红狗营养膏\",\"params\":{},\"type\":\"2\"}', 'null', 1, '不允许操作超级管理员角色', '2021-06-03 20:29:32');
+INSERT INTO `sys_oper_log` VALUES (298, '物品', 1, 'com.ruoyi.web.controller.fyms.GoodsController.add()', 'POST', 1, 'admin', NULL, '/system/goods', '127.0.0.1', '内网IP', '{\"name\":\"红狗营养膏\",\"params\":{},\"type\":\"2\"}', 'null', 1, '不允许操作超级管理员角色', '2021-06-03 20:29:41');
+INSERT INTO `sys_oper_log` VALUES (299, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/sfsadf', '127.0.0.1', '内网IP', '{ids=sfsadf}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:21:57');
+INSERT INTO `sys_oper_log` VALUES (300, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/7a0c5d41-5b68-4174-9750-68260256042e', '127.0.0.1', '内网IP', '{ids=7a0c5d41-5b68-4174-9750-68260256042e}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:22:00');
+INSERT INTO `sys_oper_log` VALUES (301, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/6795d702-cbeb-4e88-a281-9cd383131ffa', '127.0.0.1', '内网IP', '{ids=6795d702-cbeb-4e88-a281-9cd383131ffa}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:22:35');
+INSERT INTO `sys_oper_log` VALUES (302, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/6088a6a9-3616-478d-bad8-8acbf77a0204', '127.0.0.1', '内网IP', '{ids=6088a6a9-3616-478d-bad8-8acbf77a0204}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:22:40');
+INSERT INTO `sys_oper_log` VALUES (303, '宠物种类', 1, 'com.ruoyi.web.controller.fyms.BreedController.add()', 'POST', 1, 'admin', NULL, '/system/breed', '127.0.0.1', '内网IP', '{\"breedName\":\"美短矮脚\",\"createBy\":\"admin\",\"createTime\":1622794990349,\"id\":\"8c6d02f5-6c6e-400b-b2f8-4a3839f34195\",\"category\":\"2\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:23:10');
+INSERT INTO `sys_oper_log` VALUES (304, '宠物种类', 1, 'com.ruoyi.web.controller.fyms.BreedController.add()', 'POST', 1, 'admin', NULL, '/system/breed', '127.0.0.1', '内网IP', '{\"breedName\":\"银渐层\",\"createBy\":\"admin\",\"createTime\":1622795067150,\"id\":\"1ffb6e28-f046-4c1c-a075-f82902a6794c\",\"category\":\"1\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 16:24:27');
+INSERT INTO `sys_oper_log` VALUES (305, '猫咪管理', 1, 'com.ruoyi.web.controller.fyms.CatController.add()', 'POST', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"1ffb6e28-f046-4c1c-a075-f82902a6794c\",\"params\":{},\"birthDate\":1622995200000,\"createBy\":\"admin\",\"haveDate\":1622476800000,\"createTime\":1622797947972,\"primeCost\":14,\"id\":\"3842b23d-1476-4941-95d5-9a97f8f2d072\",\"state\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:12:28');
+INSERT INTO `sys_oper_log` VALUES (306, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/1ffb6e28-f046-4c1c-a075-f82902a6794c', '127.0.0.1', '内网IP', '{ids=1ffb6e28-f046-4c1c-a075-f82902a6794c}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:17:19');
+INSERT INTO `sys_oper_log` VALUES (307, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/8c6d02f5-6c6e-400b-b2f8-4a3839f34195', '127.0.0.1', '内网IP', '{ids=8c6d02f5-6c6e-400b-b2f8-4a3839f34195}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:17:24');
+INSERT INTO `sys_oper_log` VALUES (308, '宠物种类', 1, 'com.ruoyi.web.controller.fyms.BreedController.add()', 'POST', 1, 'admin', NULL, '/system/breed', '127.0.0.1', '内网IP', '{\"breedName\":\"英短矮脚\",\"createBy\":\"admin\",\"createTime\":1622798299926,\"id\":\"0d4ddb13-d4a7-4d13-b066-be7ae099d8dc\",\"category\":\"1\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:18:20');
+INSERT INTO `sys_oper_log` VALUES (309, '猫咪管理', 2, 'com.ruoyi.web.controller.fyms.CatController.edit()', 'PUT', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"8c6d02f5-6c6e-400b-b2f8-4a3839f34195\",\"remark\":\"访问\",\"updateTime\":1622798317154,\"params\":{},\"birthDate\":1622476800000,\"url\":\"http://localhost:8080/profile/upload/2021/06/02/04cdbd62-da04-4438-8a6b-47b78f2ba7c4.jpg\",\"createBy\":\"\",\"haveDate\":1623600000000,\"createTime\":1622635687000,\"updateBy\":\"admin\",\"primeCost\":111,\"id\":\"040d9c7d-e060-4a09-b4dc-b0b1771ed965\",\"state\":\"0\",\"category\":\"美短\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:18:37');
+INSERT INTO `sys_oper_log` VALUES (310, '猫咪管理', 2, 'com.ruoyi.web.controller.fyms.CatController.edit()', 'PUT', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"0d4ddb13-d4a7-4d13-b066-be7ae099d8dc\",\"remark\":\"访问\",\"updateTime\":1622798329213,\"params\":{},\"birthDate\":1622476800000,\"url\":\"http://localhost:8080/profile/upload/2021/06/02/04cdbd62-da04-4438-8a6b-47b78f2ba7c4.jpg\",\"createBy\":\"\",\"haveDate\":1623600000000,\"createTime\":1622635687000,\"updateBy\":\"admin\",\"primeCost\":111,\"id\":\"040d9c7d-e060-4a09-b4dc-b0b1771ed965\",\"state\":\"0\",\"category\":\"美短\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:18:49');
+INSERT INTO `sys_oper_log` VALUES (311, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/0d4ddb13-d4a7-4d13-b066-be7ae099d8dc', '127.0.0.1', '内网IP', '{ids=0d4ddb13-d4a7-4d13-b066-be7ae099d8dc}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:19:05');
+INSERT INTO `sys_oper_log` VALUES (312, '宠物种类', 1, 'com.ruoyi.web.controller.fyms.BreedController.add()', 'POST', 1, 'admin', NULL, '/system/breed', '127.0.0.1', '内网IP', '{\"breedName\":\"啊啊\",\"createBy\":\"admin\",\"createTime\":1622798361595,\"id\":\"15dc0e1e-9001-46b2-b5eb-76e481e53edc\",\"category\":\"1\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:19:21');
+INSERT INTO `sys_oper_log` VALUES (313, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/15dc0e1e-9001-46b2-b5eb-76e481e53edc', '127.0.0.1', '内网IP', '{ids=15dc0e1e-9001-46b2-b5eb-76e481e53edc}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:19:45');
+INSERT INTO `sys_oper_log` VALUES (314, '宠物种类', 1, 'com.ruoyi.web.controller.fyms.BreedController.add()', 'POST', 1, 'admin', NULL, '/system/breed', '127.0.0.1', '内网IP', '{\"breedName\":\"美短\",\"createBy\":\"admin\",\"createTime\":1622798479199,\"id\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"category\":\"2\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:21:19');
+INSERT INTO `sys_oper_log` VALUES (315, '猫咪管理', 2, 'com.ruoyi.web.controller.fyms.CatController.edit()', 'PUT', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"remark\":\"访问\",\"updateTime\":1622798492498,\"params\":{},\"birthDate\":1622476800000,\"url\":\"http://localhost:8080/profile/upload/2021/06/02/04cdbd62-da04-4438-8a6b-47b78f2ba7c4.jpg\",\"createBy\":\"\",\"haveDate\":1623600000000,\"createTime\":1622635687000,\"updateBy\":\"admin\",\"primeCost\":111,\"id\":\"040d9c7d-e060-4a09-b4dc-b0b1771ed965\",\"state\":\"0\",\"category\":\"美短\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:21:32');
+INSERT INTO `sys_oper_log` VALUES (316, '猫咪管理', 2, 'com.ruoyi.web.controller.fyms.CatController.edit()', 'PUT', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"updateTime\":1622798498046,\"params\":{},\"birthDate\":1622995200000,\"createBy\":\"admin\",\"haveDate\":1622476800000,\"createTime\":1622797948000,\"updateBy\":\"admin\",\"primeCost\":14,\"id\":\"3842b23d-1476-4941-95d5-9a97f8f2d072\",\"state\":\"0\",\"category\":\"美短\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 17:21:38');
+INSERT INTO `sys_oper_log` VALUES (317, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/dce3595c-8655-42d4-9362-bc6123243782', '127.0.0.1', '内网IP', '{ids=dce3595c-8655-42d4-9362-bc6123243782}', 'null', 1, '物品名称重复请修改库存', '2021-06-04 17:21:43');
+INSERT INTO `sys_oper_log` VALUES (318, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/dce3595c-8655-42d4-9362-bc6123243782', '127.0.0.1', '内网IP', '{ids=dce3595c-8655-42d4-9362-bc6123243782}', 'null', 1, '物品名称重复请修改库存', '2021-06-04 17:21:53');
+INSERT INTO `sys_oper_log` VALUES (319, '宠物种类', 3, 'com.ruoyi.web.controller.fyms.BreedController.remove()', 'DELETE', 1, 'admin', NULL, '/system/breed/dce3595c-8655-42d4-9362-bc6123243782', '127.0.0.1', '内网IP', '{ids=dce3595c-8655-42d4-9362-bc6123243782}', 'null', 1, '物品名称重复请修改库存', '2021-06-04 17:21:59');
+INSERT INTO `sys_oper_log` VALUES (320, '猫咪管理', 1, 'com.ruoyi.web.controller.fyms.CatController.add()', 'POST', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"params\":{},\"birthDate\":1622476800000,\"createBy\":\"admin\",\"haveDate\":1622563200000,\"createTime\":1622802093320,\"name\":\"美短1\",\"primeCost\":100,\"id\":\"4f0fdb23-6a09-4fba-93ba-1ef2aad62a4c\",\"state\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 18:21:33');
+INSERT INTO `sys_oper_log` VALUES (321, '猫咪管理', 1, 'com.ruoyi.web.controller.fyms.CatController.add()', 'POST', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"remark\":\"是\",\"params\":{},\"birthDate\":1623168000000,\"haveDate\":1623081600000,\"name\":\"美短1\",\"primeCost\":120,\"state\":\"0\"}', 'null', 1, '猫咪名称不允许重复', '2021-06-04 18:21:53');
+INSERT INTO `sys_oper_log` VALUES (322, '猫咪管理', 1, 'com.ruoyi.web.controller.fyms.CatController.add()', 'POST', 1, 'admin', NULL, '/system/cat', '127.0.0.1', '内网IP', '{\"breedId\":\"dce3595c-8655-42d4-9362-bc6123243782\",\"remark\":\"是\",\"params\":{},\"birthDate\":1623168000000,\"createBy\":\"admin\",\"haveDate\":1623081600000,\"createTime\":1622802117594,\"name\":\"美短2\",\"primeCost\":120,\"id\":\"8f50fb57-bd77-4ef3-9492-2bde3c05ff89\",\"state\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2021-06-04 18:21:57');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1415,7 +1446,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2021-06-03 16:38:37', 'admin', '2021-05-25 09:07:12', '', '2021-06-03 16:38:37', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2021-06-04 16:21:29', 'admin', '2021-05-25 09:07:12', '', '2021-06-04 16:21:28', '管理员');
 INSERT INTO `sys_user` VALUES (2, 103, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2021-05-25 09:07:12', 'admin', '2021-05-25 09:07:12', 'admin', '2021-05-27 08:53:10', '测试员');
 INSERT INTO `sys_user` VALUES (100, 103, '叶鸿鹰', '小飞鹰', '00', '', '', '1', '', '$2a$10$gKt1T27iU4nUUBy9SGHm/.DCsFQTDhS98A3D/Eyh4abhteVJ44m82', '0', '0', '127.0.0.1', '2021-06-01 16:37:42', 'admin', '2021-05-27 08:54:58', '', '2021-06-01 16:37:42', NULL);
 
@@ -1460,7 +1491,7 @@ CREATE TABLE `us_client`  (
   `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户姓名',
   `sex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '性别',
   `tel` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话',
-  `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '(0:已成交，1：未成交 2:待跟进 3:已失效)',
+  `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '(0:已成交 1:待跟进 2:已失效)',
   `del_flag` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '创建者',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
