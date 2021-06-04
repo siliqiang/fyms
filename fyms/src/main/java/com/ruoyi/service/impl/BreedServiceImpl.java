@@ -2,14 +2,19 @@ package com.ruoyi.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.domain.Breed;
+import com.ruoyi.domain.Cat;
 import com.ruoyi.mapper.BreedMapper;
 import com.ruoyi.service.BreedService;
+import com.ruoyi.service.ICatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -22,6 +27,9 @@ import org.springframework.stereotype.Service;
 public class BreedServiceImpl implements BreedService {
     @Autowired
     private BreedMapper breedMapper;
+
+    @Resource
+    private ICatService catService;
 
     /**
      * 查询宠物种类
@@ -83,6 +91,15 @@ public class BreedServiceImpl implements BreedService {
      */
     @Override
     public int deleteFyPetBreedByIds(String[] ids) {
+        for (String id : ids) {
+            //如果该种类被其他地方使用则无法删除
+            Cat cat = new Cat();
+            cat.setBreedId(id);
+            List<Cat> cats = catService.selectCatList(cat);
+            if (cats.size() > 0) {
+                throw new CustomException("该种类被使用无法删除");
+            }
+        }
         return breedMapper.deleteFyPetBreedByIds(ids);
     }
 
@@ -94,6 +111,13 @@ public class BreedServiceImpl implements BreedService {
      */
     @Override
     public int deleteFyPetBreedById(String id) {
+        //如果该种类被其他地方使用则无法删除
+        Cat cat = new Cat();
+        cat.setBreedId(id);
+        List<Cat> cats = catService.selectCatList(cat);
+        if (cats.size() > 0) {
+            throw new CustomException("该种类被使用无法删除");
+        }
         return breedMapper.deleteFyPetBreedById(id);
     }
 }

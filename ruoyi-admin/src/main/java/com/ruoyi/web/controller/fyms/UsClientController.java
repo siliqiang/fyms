@@ -22,8 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/client")
-public class UsClientController extends BaseController
-{
+public class UsClientController extends BaseController {
     @Autowired
     private IUsClientService usClientService;
 
@@ -32,22 +31,19 @@ public class UsClientController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:client:list')")
     @GetMapping("/list")
-    public TableDataInfo list(UsClient usClient)
-    {
+    public TableDataInfo list(UsClient usClient) {
         startPage();
         List<UsClient> list = usClientService.selectUsClientList(usClient);
         return getDataTable(list);
     }
+
     /**
      * 查询客户信息列表
      */
 //    @PreAuthorize("@ss.hasPermi('system:client:list')")
     @GetMapping("/list/select")
-    public TableDataInfo listBy(UsClient usClient)
-    {
-        startPage();
-        List<UsClient> list = usClientService.selectUsClientList(usClient);
-        return getDataTable(list);
+    public AjaxResult AllList(UsClient usClient) {
+        return AjaxResult.success(usClientService.selectUsClientList(usClient));
     }
 
     /**
@@ -56,8 +52,7 @@ public class UsClientController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:client:export')")
     @Log(title = "客户信息", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(UsClient usClient)
-    {
+    public AjaxResult export(UsClient usClient) {
         List<UsClient> list = usClientService.selectUsClientList(usClient);
         ExcelUtil<UsClient> util = new ExcelUtil<UsClient>(UsClient.class);
         return util.exportExcel(list, "客户信息数据");
@@ -68,8 +63,7 @@ public class UsClientController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:client:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return AjaxResult.success(usClientService.selectUsClientById(id));
     }
 
@@ -79,8 +73,7 @@ public class UsClientController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:client:add')")
     @Log(title = "客户信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody UsClient usClient)
-    {
+    public AjaxResult add(@RequestBody UsClient usClient) {
         return toAjax(usClientService.insertUsClient(usClient));
     }
 
@@ -90,8 +83,7 @@ public class UsClientController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:client:edit')")
     @Log(title = "客户信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody UsClient usClient)
-    {
+    public AjaxResult edit(@RequestBody UsClient usClient) {
         return toAjax(usClientService.updateUsClient(usClient));
     }
 
@@ -100,9 +92,8 @@ public class UsClientController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:client:remove')")
     @Log(title = "客户信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(usClientService.deleteUsClientByIds(ids));
     }
 }

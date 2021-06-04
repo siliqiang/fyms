@@ -2,6 +2,7 @@ package com.ruoyi.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,12 @@ public class GoodsServiceImpl implements IGoodsService {
      */
     @Override
     public int insertGoods(Goods goods) {
+        Goods newGoods = new Goods();
+        newGoods.setName(goods.getName());
+        List<Goods> goodsList = selectGoodsList(newGoods);
+        if (goodsList.size()>0){
+            throw new CustomException("物品名称重复请修改库存");
+        }
         goods.setId(IdUtils.fastUUID());
         goods.setCreateTime(DateUtils.getNowDate());
         return goodsMapper.insertGoods(goods);

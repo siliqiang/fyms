@@ -1,6 +1,8 @@
 package com.ruoyi.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -56,6 +58,13 @@ public class CatServiceImpl implements ICatService
     @Override
     public int insertCat(Cat cat)
     {
+
+        Cat newCat = new Cat();
+        newCat.setName(cat.getName());
+        List<Cat> cats = selectCatList(newCat);
+        if (cats.size()>0){
+            throw new CustomException("猫咪名称不允许重复");
+        }
         //生成uuid
         cat.setId(IdUtils.fastUUID());
         //创建人
