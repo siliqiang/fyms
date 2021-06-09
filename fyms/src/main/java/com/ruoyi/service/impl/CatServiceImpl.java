@@ -25,13 +25,14 @@ import javax.annotation.Resource;
  * @date 2021-06-01
  */
 @Service
-public class CatServiceImpl implements ICatService
-{
+public class CatServiceImpl implements ICatService {
     @Autowired
     private CatMapper catMapper;
 
     @Autowired
     private NumUtils numUtils;
+    //猫咪编号的前缀
+    private final String M = "M";
 
     /**
      * 查询猫咪管理
@@ -40,8 +41,7 @@ public class CatServiceImpl implements ICatService
      * @return 猫咪管理
      */
     @Override
-    public Cat selectCatById(String id)
-    {
+    public Cat selectCatById(String id) {
         return catMapper.selectCatById(id);
     }
 
@@ -52,8 +52,7 @@ public class CatServiceImpl implements ICatService
      * @return 猫咪管理
      */
     @Override
-    public List<Cat> selectCatList(Cat cat)
-    {
+    public List<Cat> selectCatList(Cat cat) {
         return catMapper.selectCatList(cat);
     }
 
@@ -64,15 +63,13 @@ public class CatServiceImpl implements ICatService
      * @return 结果
      */
     @Override
-    public int insertCat(Cat cat)
-    {
+    public int insertCat(Cat cat) {
         //获取猫咪的编号并且set进去
-        cat.setNum(numUtils.getAuto( redisKey.CAT_NUM.toString(), "CAT_NUM"));
-
+        cat.setNum(numUtils.getAuto(M, redisKey.CAT_NUM.toString()));
         Cat newCat = new Cat();
         newCat.setNum(cat.getNum());
         List<Cat> cats = selectCatList(newCat);
-        if (cats.size()>0){
+        if (cats.size() > 0) {
             throw new CustomException("猫咪编号重复");
         }
         //生成uuid
@@ -92,8 +89,7 @@ public class CatServiceImpl implements ICatService
      * @return 结果
      */
     @Override
-    public int updateCat(Cat cat)
-    {
+    public int updateCat(Cat cat) {
         cat.setUpdateTime(DateUtils.getNowDate());
         cat.setUpdateBy(SecurityUtils.getUsername());
         return catMapper.updateCat(cat);
@@ -106,8 +102,7 @@ public class CatServiceImpl implements ICatService
      * @return 结果
      */
     @Override
-    public int deleteCatByIds(String[] ids)
-    {
+    public int deleteCatByIds(String[] ids) {
         return catMapper.deleteCatByIds(ids);
     }
 
@@ -118,8 +113,7 @@ public class CatServiceImpl implements ICatService
      * @return 结果
      */
     @Override
-    public int deleteCatById(String id)
-    {
+    public int deleteCatById(String id) {
         return catMapper.deleteCatById(id);
     }
 }

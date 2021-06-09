@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             if( b.category=1,'英短','美短') as category
         FROM
             fy_pet_cat a
-                LEFT JOIN fy_pet_breed b ON a.breed_id=b.id     </sql>
+                LEFT JOIN fy_pet_breed b ON a.breed_id=b.id  ORDER BY a.have_date DESC    </sql>
 
     <select id="selectCatList" parameterType="Cat" resultMap="CatResult">
         <include refid="selectCatVo"/>
