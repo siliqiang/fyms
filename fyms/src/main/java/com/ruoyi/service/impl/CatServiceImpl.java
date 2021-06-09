@@ -2,8 +2,11 @@ package com.ruoyi.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.enums.redisKey;
 import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.NumUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.domain.Cat;
@@ -11,6 +14,8 @@ import com.ruoyi.mapper.CatMapper;
 import com.ruoyi.service.ICatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -24,6 +29,9 @@ public class CatServiceImpl implements ICatService
 {
     @Autowired
     private CatMapper catMapper;
+
+    @Autowired
+    private NumUtils numUtils;
 
     /**
      * 查询猫咪管理
@@ -58,12 +66,14 @@ public class CatServiceImpl implements ICatService
     @Override
     public int insertCat(Cat cat)
     {
+        //获取猫咪的编号并且set进去
+        cat.setNum(numUtils.getAuto( redisKey.CAT_NUM.toString(), "CAT_NUM"));
 
         Cat newCat = new Cat();
-        newCat.setName(cat.getName());
+        newCat.setNum(cat.getNum());
         List<Cat> cats = selectCatList(newCat);
         if (cats.size()>0){
-            throw new CustomException("猫咪名称不允许重复");
+            throw new CustomException("猫咪编号重复");
         }
         //生成uuid
         cat.setId(IdUtils.fastUUID());

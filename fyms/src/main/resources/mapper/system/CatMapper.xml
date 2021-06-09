@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="Cat" id="CatResult">
         <result property="id"    column="id"    />
         <result property="breedId"    column="breed_id"    />
-        <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
         <result property="birthDate"    column="birth_date"    />
         <result property="haveDate"    column="have_date"    />
         <result property="primeCost"    column="prime_cost"    />
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             a.id,
             a.breed_id,
-            a.name,
+            a.num,
             a.birth_date,
             a.have_date,
             a.prime_cost,
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="birthDate != null "> and birth_date = #{birthDate}</if>
             <if test="haveDate != null "> and have_date = #{haveDate}</if>
             <if test="primeCost != null "> and prime_cost = #{primeCost}</if>
-            <if test="name != null "> and name = #{name}</if>
+            <if test="num != null "> and num = #{num}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
         </where>
     </select>
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="breedId != null">breed_id,</if>
-            <if test="name != null">name,</if>
+            <if test="num != null">num,</if>
             <if test="birthDate != null">birth_date,</if>
             <if test="haveDate != null">have_date,</if>
             <if test="primeCost != null">prime_cost,</if>
@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="breedId != null">#{breedId},</if>
-            <if test="name != null">#{name},</if>
+            <if test="num != null">#{num},</if>
             <if test="birthDate != null">#{birthDate},</if>
             <if test="haveDate != null">#{haveDate},</if>
             <if test="primeCost != null">#{primeCost},</if>

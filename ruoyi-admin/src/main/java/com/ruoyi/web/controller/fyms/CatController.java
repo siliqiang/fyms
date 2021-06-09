@@ -44,6 +44,11 @@ public class CatController extends BaseController {
         return getDataTable(list);
     }
 
+    @GetMapping("/list/select")
+    public AjaxResult getListAll(Cat cat){
+        return AjaxResult.success(catService.selectCatList(cat));
+    }
+
     /**
      * 导出猫咪管理列表
      */

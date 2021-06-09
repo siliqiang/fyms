@@ -46,6 +46,16 @@ public class GoodsController extends BaseController
     }
 
     /**
+     * 获取所有的
+     * @param goods
+     * @return
+     */
+    @GetMapping("/list/select")
+    public AjaxResult listAll(Goods goods){
+        return AjaxResult.success(goodsService.selectGoodsList(goods));
+    }
+
+    /**
      * 导出物品列表
      */
     @PreAuthorize("@ss.hasPermi('system:goods:export')")

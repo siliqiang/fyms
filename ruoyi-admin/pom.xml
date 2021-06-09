@@ -16,7 +16,12 @@
     </description>
 
     <dependencies>
-
+        <!--        springboot 测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- spring-boot-devtools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,7 +54,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
-         <!-- Mysql驱动包 -->
+        <!-- Mysql驱动包 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -79,6 +84,23 @@
             <artifactId>fyms</artifactId>
         </dependency>
 
+
+        <!-- junit测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.2.12.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.2.13.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -106,7 +128,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>${project.artifactId}</warName>
                 </configuration>
-           </plugin>
+            </plugin>
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>

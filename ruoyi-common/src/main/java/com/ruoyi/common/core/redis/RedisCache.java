@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 import org.springframework.stereotype.Component;
 
 /**
@@ -84,6 +86,17 @@ public class RedisCache
     {
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
         return operation.get(key);
+    }
+
+    /**
+     * 自增
+     * @param key key 缓存键值
+     * @return
+     */
+    public Integer increment(final String key)
+    {
+        RedisAtomicInteger aa = new RedisAtomicInteger(key, redisTemplate.getConnectionFactory());
+         return aa.getAndIncrement();
     }
 
     /**

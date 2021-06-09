@@ -50,9 +50,9 @@ public class Cat extends BaseEntity
      */
     private String breedName;
     /**
-     * 猫咪名称
+     * 猫咪编号
      */
-    private String name;
+    private String num;
 
     /**
      * 类别
