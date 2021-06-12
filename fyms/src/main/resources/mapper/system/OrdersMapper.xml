@@ -3,11 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.mapper.OrdersMapper">
-    
+
     <resultMap type="Orders" id="OrdersResult">
         <result property="id"    column="id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="sourceName"    column="source_name"    />
         <result property="clientId"    column="client_id"    />
-        <result property="sourceId"    column="source_id"    />
         <result property="type"    column="type"    />
         <result property="sellingPrice"    column="selling_price"    />
         <result property="quantity"    column="quantity"    />
@@ -17,29 +18,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="sourceId"    column="source_id"    />
     </resultMap>
 
     <sql id="selectOrdersVo">
-        select id, client_id, source_id, type, selling_price, quantity, price, create_by, create_time, update_by, update_time, remark from fy_pet_orders
-    </sql>
+        SELECT
+            a.id,
+            u.`name` user_name ,
+            CASE
+
+                WHEN c.num IS NOT NULL THEN
+                    c.num ELSE g.`name`
+                END source_name,
+            a.client_id,
+            a.source_id,
+            a.type,
+            a.selling_price,
+            a.quantity,
+            a.price,
+            a.create_by,
+            a.create_time,
+            a.update_by,
+            a.update_time,
+            a.remark
+        FROM
+            fy_pet_orders a
+                LEFT JOIN us_client u ON a.client_id = u.id
+                LEFT JOIN fy_pet_cat c ON c.id = a.source_id
+                LEFT JOIN fy_pet_goods g ON g.id = a.source_id    </sql>
 
     <select id="selectOrdersList" parameterType="Orders" resultMap="OrdersResult">
         <include refid="selectOrdersVo"/>
-        <where>  
-            <if test="clientId != null  and clientId != ''"> and client_id = #{clientId}</if>
-            <if test="sourceId != null  and sourceId != ''"> and source_id = #{sourceId}</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
-            <if test="sellingPrice != null "> and selling_price = #{sellingPrice}</if>
-            <if test="quantity != null "> and quantity = #{quantity}</if>
-            <if test="price != null "> and price = #{price}</if>
+        <where>
+            <if test="clientId != null  and clientId != ''"> and a.client_id = #{clientId}</if>
+            <if test="sourceId != null  and sourceId != ''"> and a.source_id = #{sourceId}</if>
+            <if test="type != null  and type != ''"> and a.type = #{type}</if>
+            <if test="sellingPrice != null "> and a.selling_price = #{sellingPrice}</if>
+            <if test="quantity != null "> and a.quantity = #{quantity}</if>
+            <if test="price != null "> and a.price = #{price}</if>
         </where>
     </select>
-    
+
     <select id="selectOrdersById" parameterType="String" resultMap="OrdersResult">
         <include refid="selectOrdersVo"/>
-        where id = #{id}
+        where a.id = #{id}
     </select>
-        
+
     <insert id="insertOrders" parameterType="Orders">
         insert into fy_pet_orders
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -95,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOrdersByIds" parameterType="String">
-        delete from fy_pet_orders where id in 
+        delete from fy_pet_orders where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
