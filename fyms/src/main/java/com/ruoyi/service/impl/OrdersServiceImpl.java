@@ -1,6 +1,8 @@
 package com.ruoyi.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,7 @@ import com.ruoyi.service.IOrdersService;
  * @date 2021-06-01
  */
 @Service
-public class OrdersServiceImpl implements IOrdersService
-{
+public class OrdersServiceImpl implements IOrdersService {
     @Autowired
     private OrdersMapper ordersMapper;
 
@@ -28,8 +29,7 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 订单
      */
     @Override
-    public Orders selectOrdersById(String id)
-    {
+    public Orders selectOrdersById(String id) {
         return ordersMapper.selectOrdersById(id);
     }
 
@@ -40,9 +40,10 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 订单
      */
     @Override
-    public List<Orders> selectOrdersList(Orders orders)
-    {
-        return ordersMapper.selectOrdersList(orders);
+    public List<Orders> selectOrdersList(Orders orders) {
+        List<Orders> ordersList = ordersMapper.selectOrdersList(orders);
+        ordersList.stream().forEach(a -> a.setProfit(a.getSellingPrice().subtract(a.getPrice()).multiply(BigDecimal.valueOf(a.getQuantity()))));
+        return ordersList;
     }
 
     /**
@@ -52,8 +53,7 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 结果
      */
     @Override
-    public int insertOrders(Orders orders)
-    {
+    public int insertOrders(Orders orders) {
 
         orders.setId(IdUtils.fastUUID());
         orders.setCreateTime(DateUtils.getNowDate());
@@ -67,8 +67,7 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 结果
      */
     @Override
-    public int updateOrders(Orders orders)
-    {
+    public int updateOrders(Orders orders) {
         orders.setUpdateTime(DateUtils.getNowDate());
         return ordersMapper.updateOrders(orders);
     }
@@ -80,8 +79,7 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 结果
      */
     @Override
-    public int deleteOrdersByIds(String[] ids)
-    {
+    public int deleteOrdersByIds(String[] ids) {
         return ordersMapper.deleteOrdersByIds(ids);
     }
 
@@ -92,8 +90,7 @@ public class OrdersServiceImpl implements IOrdersService
      * @return 结果
      */
     @Override
-    public int deleteOrdersById(String id)
-    {
+    public int deleteOrdersById(String id) {
         return ordersMapper.deleteOrdersById(id);
     }
 }

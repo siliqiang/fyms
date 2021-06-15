@@ -56,4 +56,9 @@ public class Orders extends BaseEntity
     /** 来源id（可以是猫咪或者用品） */
     private String sourceId;
 
+    /**
+     * 利润
+     */
+    private  BigDecimal Profit;
+
 }
