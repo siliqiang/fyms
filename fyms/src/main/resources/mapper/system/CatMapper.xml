@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCatList" parameterType="Cat" resultMap="CatResult">
         <include refid="selectCatVo"/>
         <where>
+            <if test="id != null "> and a.id = #{id}</if>
             <if test="birthDate != null "> and birth_date = #{birthDate}</if>
             <if test="haveDate != null "> and have_date = #{haveDate}</if>
             <if test="primeCost != null "> and prime_cost = #{primeCost}</if>
